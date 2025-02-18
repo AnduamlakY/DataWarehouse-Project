@@ -31,7 +31,10 @@ USE DataWarehouseAnalytics;
 GO
 
 -- Create Schemas
-
+CREATE SCHEMA Bronze;
+go
+CREATE SCHEMA silver;
+go
 CREATE SCHEMA gold;
 GO
 
