@@ -84,6 +84,7 @@ BEGIN CATCH
 
 PRINT '=====================================================';
 PRINT '    Error occured while loading the bronze layer     ';
+print 'Error Message ' + Error_message();
 PRINT '=====================================================';
 END CATCH
 END;
