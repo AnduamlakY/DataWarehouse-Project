@@ -3,10 +3,18 @@ GO
 
 ---Exec BRONZE.LOAD_BRONZE
 
-CREATE PROCEDURE BRONZE.LOAD_BRONZE AS
+CREATE OR ALTER PROCEDURE BRONZE.LOAD_BRONZE AS
 
 BEGIN
+BEGIN TRY
 
+PRINT '=================================================';
+PRINT 'LOADING BRONZE LAYER';
+PRINT '=================================================';
+
+PRINT '--------------------------------------------------';
+PRINT 'LOADING CRM TABLES';
+PRINT '--------------------------------------------------';
 TRUNCATE TABLE bronze.crm_cust_info ;
 BULK INSERT bronze.crm_cust_info 
 FROM 'C:\Users\Public\dataset\crm_cust_info.csv'
@@ -37,6 +45,9 @@ WITH (
 	
 );
 
+PRINT '--------------------------------------------------';
+PRINT 'LOADING ERP TABLES';
+PRINT '--------------------------------------------------';
 
 TRUNCATE TABLE bronze.erp_cust_az12 ;
 BULK INSERT Bronze.erp_cust_az12
@@ -47,8 +58,6 @@ WITH (
 	TABLOCK
 	
 );
-
-
 
 TRUNCATE TABLE bronze.erp_loc_a101 ;
 BULK INSERT Bronze.erp_loc_a101
@@ -69,5 +78,12 @@ WITH (
 	TABLOCK
 	
 );
+END TRY
 
+BEGIN CATCH
+
+PRINT '=====================================================';
+PRINT '    Error occured while loading the bronze layer     ';
+PRINT '=====================================================';
+END CATCH
 END;
