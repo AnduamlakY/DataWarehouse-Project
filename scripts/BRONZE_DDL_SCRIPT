@@ -1,5 +1,6 @@
 ------CREATING DDL SCRIPT for bronze layer
 
+USE DataWarehouseAnalytics;
 IF OBJECT_ID('bronze.crm_cust_info') IS NOT NULL
 
       DROP TABLE bronze.crm_cust_info 
